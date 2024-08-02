@@ -42,8 +42,14 @@ public_users.get('/author/:author',function (req, res) {
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    const title = req.params.title;
+    try {
+        const response = await axios.get(`URL_TO_GET_BOOKS_BY_TITLE/${title}`);
+        const booksByTitle = response.data;
+        res.status(200).json(booksByTitle);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching books by title", error: error.message });
+    }
 });
 
 //  Get book review
