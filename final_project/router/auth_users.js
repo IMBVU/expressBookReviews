@@ -14,11 +14,11 @@ let users = [
 const jwtSecret = '244d0b97c61cb978567e348a15fc8cd5c3c5791af982ccae88db48383bc3c273';
 
 const isValid = (username)=>{ //returns boolean
-//write code to check is the username is valid
+    return true 
 }
 
 const authenticatedUser = (username,password)=>{ //returns boolean
-//write code to check if username and password match the one we have in records.
+    return true
 }
 
 //only registered users can login
