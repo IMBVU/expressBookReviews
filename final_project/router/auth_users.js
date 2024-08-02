@@ -23,8 +23,14 @@ const authenticatedUser = (username,password)=>{ //returns boolean
 
 //only registered users can login
 regd_users.post("/login", (req,res) => {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    const { username, password } = req.body;
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+        const token = jwt.sign({ username: user.username }, jwtSecret, { expiresIn: '1h' });
+        res.status(200).json({ token });
+    } else {
+        res.status(401).json({ message: "Invalid username or password" });
+    }
 });
 
 // Add a book review
