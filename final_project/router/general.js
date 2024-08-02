@@ -30,8 +30,14 @@ public_users.get('/isbn/:isbn',function (req, res) {
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    const author = req.params.author;
+    try {
+        const response = await axios.get(`URL_TO_GET_BOOKS_BY_AUTHOR/${author}`);
+        const booksByAuthor = response.data;
+        res.status(200).json(booksByAuthor);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching books by author", error: error.message });
+    }
 });
 
 // Get all books based on title
